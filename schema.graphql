@@ -1,0 +1,138 @@
+type Market @entity {
+  " Unique ID for the market "
+  id: ID!
+
+  " Token associated to this market "
+  token: Token!
+
+  " Current market state "
+  state: MarketState
+}
+
+type Token @entity {
+  " Unique ID for the token "
+  id: ID!
+
+  " Token address "
+  address: Bytes!
+
+  " Number of decimals of the token "
+  decimals: Int!
+
+  " Human-readable name of the token "
+  name: String!
+
+  " Symbol of the token "
+  symbol: String!
+
+  " Associated market "
+  market: Market!
+
+  " Current price "
+  price: TokenPrice
+}
+
+enum PositionStatus {
+  Open
+  Closed
+}
+
+type OpenPosition @entity {
+  id: ID!
+
+  " Position owner's address "
+  accountOwner: Bytes!
+
+  " Current position amount "
+  amount: BigInt!
+
+  " Market maker reference  "
+  makerMarket: Market
+
+  " Market taker reference "
+  takerMarket: Market
+
+  " String representation of position market "
+  market: String
+
+  " Price the position opened at "
+  openPrice: BigDecimal!
+  
+  " Maker trade fees "
+  makerFee: BigDecimal!
+  
+   " Taker trade fees "
+  takerFee: BigDecimal!
+
+  " Position status - open or closed "
+  status: PositionStatus!
+  
+  " Timestamp when the position was opened "
+  created: BigInt!
+}
+
+type Swap @entity {
+    id: ID!
+    
+    " User address who initiates swap "
+    caller: Bytes!
+    
+    " Token being swapped contract address "
+    tokenIn: Bytes!
+    
+    " Token being swapped symbol "
+    tokenInSymbol: String!
+    
+    " Token being swapped to contract address "
+    tokenOut: Bytes!
+    
+    " Token being swapped to symbol "
+    tokenOutSymbol: String!
+    
+    " Total amount of tokens being swapped "
+    tokenAmountIn: BigDecimal!
+    
+    " Total amount of tokens being swapped to "
+    tokenAmountOut: BigDecimal!
+    
+    " User address that initiates the swap "
+    userAddress: User
+    
+    " Timestamp of swap "
+    timestamp: Int!
+}
+
+type HODLprogram @entity {
+    " Program ID "
+    id: ID!
+    
+    " Token address of sold token "
+    address: Bytes!
+    
+    " Symbol of token being sold "
+    addressSymbol: Bytes!
+    
+    " Price of bought token in ETH "
+    ethPrice: BigDecimal!
+    
+    " Fixed exchanged rate of 1 ETH in USD "
+    exchangeRate: BigDecimal!
+    
+    " Hard cap in tokens "
+    tokenHardCap: BigDecimal!
+    
+    " Hard cap in tokens "
+    tokenHardCap: BigDecimal!
+    
+    " Already raised amount in tokens "
+    tokenAlreadyRaised: BigDecimal!
+    
+    " Already raised amount in  ETH "
+    amountRaised: BigDecimal!
+    
+    " Basic exchange rate of 1 ETH in tokens "
+    basicExchangeRate: BigDecimal!
+    
+    " Timestamp of token reception "
+    receptionTimestamp: BigInt
+}

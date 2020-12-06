@@ -95,9 +95,6 @@ type Swap @entity {
     " Total amount of tokens being swapped to "
     tokenAmountOut: BigDecimal!
     
-    " User address that initiates the swap "
-    userAddress: User
-    
     " Timestamp of swap "
     timestamp: Int!
 }
